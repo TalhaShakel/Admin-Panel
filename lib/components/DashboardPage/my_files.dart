@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 
 import '../../constants/Const_Colors.dart';
 import '../../constants/Responsive.dart';
 import '../../constants/padding.dart';
-
 
 class MyFiles extends StatelessWidget {
   const MyFiles({
@@ -21,7 +24,8 @@ class MyFiles extends StatelessWidget {
           Responsive(
             mobile: FileInfoCardGridView(
               crossAxisCount: _size.width < 650 ? 2 : 4,
-              childAspectRatio: _size.width < 650  &&  _size.width>350? 1.5   : 1.3,
+              childAspectRatio:
+                  _size.width < 650 && _size.width > 350 ? 1.5 : 1.3,
             ),
             tablet: const FileInfoCardGridView(),
             desktop: FileInfoCardGridView(
@@ -34,7 +38,7 @@ class MyFiles extends StatelessWidget {
   }
 }
 
-class FileInfoCardGridView extends StatelessWidget {
+class FileInfoCardGridView extends StatefulWidget {
   const FileInfoCardGridView({
     Key? key,
     this.crossAxisCount = 4,
@@ -45,32 +49,101 @@ class FileInfoCardGridView extends StatelessWidget {
   final double childAspectRatio;
 
   @override
+  State<FileInfoCardGridView> createState() => _FileInfoCardGridViewState();
+}
+
+class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
+  @override
+  var rideRequests, activeDrivers, drivers, users;
+  void initState() {
+    // TODO: implement initState
+    dataGet("All Ride Requests").then((id) {
+      print("Id that was loaded: $id");
+      rideRequests = id;
+    });
+    // rideRequests = dataGet("All Ride Requests");
+    dataGet("activeDrivers").then((id) {
+      print("Id that was loaded: $id");
+      activeDrivers = id;
+    });
+
+    dataGet("drivers").then((id) {
+      print("Id that was loaded: $id");
+      drivers = id;
+    });
+    dataGet("users").then((id) {
+      print("Id that was loaded: $id");
+      users = id;
+    });
+
+    super.initState();
+  }
+
+  dataGet(type) async {
+    try {
+      DatabaseReference ref = FirebaseDatabase.instance.ref("$type");
+      DatabaseEvent event = await ref.once();
+      // print("object");
+      Map<String, dynamic>? k = event.snapshot.value as Map<String, dynamic>;
+      print(k.length.toString() + "$type");
+
+      return k.length;
+    } on FirebaseException catch (e) {
+      Get.snackbar("${e.message}", "");
+      print(e.toString() + "eee");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: defaultPadding,
-          mainAxisSpacing: defaultPadding,
-
-          childAspectRatio: childAspectRatio,
-        ),
-        children: [
-          CustomTotalDetails(icon: Icons.person_rounded,detail:  "1000",title:"Total Users",colors: ConstColors.primaryColor),
-          CustomTotalDetails(icon: Icons.person_rounded,detail:  "1000",title: "Active Users",colors: ConstColors.red),
-          CustomTotalDetails(icon: Icons.person_rounded,detail:  "1000",title: "Total Drivers",colors: ConstColors.lightBlue),
-          CustomTotalDetails(icon: Icons.person_rounded,detail:  "1000",title: "Active Drivers",colors: ConstColors.green),
-
-        ],
-      ),
-    );
+    return rideRequests == null
+        ? Container()
+        : Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: widget.crossAxisCount,
+                crossAxisSpacing: defaultPadding,
+                mainAxisSpacing: defaultPadding,
+                childAspectRatio: widget.childAspectRatio,
+              ),
+              children: [
+                CustomTotalDetails(
+                    icon: Icons.person_rounded,
+                    detail: "${users}",
+                    title: "Total Users",
+                    colors: ConstColors.primaryColor),
+                CustomTotalDetails(
+                    icon: Icons.person_rounded,
+                    detail: "${users}",
+                    title: "Active Users",
+                    colors: ConstColors.red),
+                CustomTotalDetails(
+                    icon: Icons.person_rounded,
+                    detail: "${drivers}",
+                    title: "Total Drivers",
+                    colors: ConstColors.lightBlue),
+                CustomTotalDetails(
+                    icon: Icons.person_rounded,
+                    detail: "${activeDrivers}",
+                    title: "Active Drivers",
+                    colors: ConstColors.green),
+              ],
+            ),
+          );
   }
 }
+
 class CustomTotalDetails extends StatelessWidget {
-  CustomTotalDetails({Key? key,required this.title,required this.colors,required this.detail,required this.icon}) : super(key: key);
+  CustomTotalDetails(
+      {Key? key,
+      required this.title,
+      required this.colors,
+      required this.detail,
+      required this.icon})
+      : super(key: key);
 
   IconData icon;
   String title;
@@ -81,27 +154,22 @@ class CustomTotalDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
 
-    return  Container(
-
-
+    return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: ConstColors.primaryColor,width: 2),
+        border: Border.all(color: ConstColors.primaryColor, width: 2),
         boxShadow: [
           BoxShadow(
               color: const Color(0xffBBC3CE).withOpacity(0.6),
-              offset: const Offset(4,4),
-              blurRadius: 12
-          ),
+              offset: const Offset(4, 4),
+              blurRadius: 12),
           BoxShadow(
               color: const Color(0xffFDFFFF).withOpacity(0.8),
-              offset: const Offset(-4,-4),
-              blurRadius: 12
-          ),
+              offset: const Offset(-4, -4),
+              blurRadius: 12),
         ],
         borderRadius: const BorderRadius.all(Radius.circular(10)),
-
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,36 +177,33 @@ class CustomTotalDetails extends StatelessWidget {
         children: [
           Container(
               padding: const EdgeInsets.all(10),
-              height: _size.width< 400?40:50,
-              width: _size.width< 400?40:50,
+              height: _size.width < 400 ? 40 : 50,
+              width: _size.width < 400 ? 40 : 50,
               decoration: BoxDecoration(
-
                 color: colors,
-                borderRadius:
-                const BorderRadius.all(Radius.circular(25)),
+                borderRadius: const BorderRadius.all(Radius.circular(25)),
               ),
-              child: Icon(icon,size: _size.width< 400?15:20,)),
+              child: Icon(
+                icon,
+                size: _size.width < 400 ? 15 : 20,
+              )),
           const Spacer(),
           Text(
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context)
-                .textTheme
-                .caption!
-                .copyWith(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.caption!.copyWith(
+                color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
           ),
           const Spacer(),
-
           Text(
             detail,
             style: Theme.of(context)
                 .textTheme
                 .caption!
-                .copyWith(color: Colors.black,height: 0.5),
+                .copyWith(color: Colors.black, height: 0.5),
           ),
           const Spacer(),
-
         ],
       ),
     );

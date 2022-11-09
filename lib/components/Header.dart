@@ -7,7 +7,6 @@ import '../constants/Responsive.dart';
 import '../constants/padding.dart';
 import '../controllers/MenuController.dart';
 
-
 class Header extends StatelessWidget {
   const Header({
     required this.title,
@@ -22,7 +21,10 @@ class Header extends StatelessWidget {
       children: [
         if (!Responsive.isDesktop(context))
           IconButton(
-            icon: Icon(Icons.menu,color: ConstColors.primaryColor,),
+            icon: Icon(
+              Icons.menu,
+              color: ConstColors.primaryColor,
+            ),
             onPressed: context.read<MenuController>().controlMenu,
           ),
         if (!Responsive.isMobile(context))
@@ -34,14 +36,13 @@ class Header extends StatelessWidget {
                   textStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
-                      fontWeight: FontWeight.w500
-                  )
-              ),
+                      fontWeight: FontWeight.w500)),
             ),
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
-        Expanded(child: Padding(
+        Expanded(
+            child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SearchField(),
         )),
@@ -71,10 +72,13 @@ class ProfileCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.person_rounded,size: 16,color: Colors.black,),
+          Icon(
+            Icons.person_rounded,
+            size: 16,
+            color: Colors.black,
+          ),
           Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
             child: Text("Muhammad Hassan"),
           ),
           Icon(Icons.keyboard_arrow_down),
@@ -83,6 +87,7 @@ class ProfileCard extends StatelessWidget {
     );
   }
 }
+
 class SearchField extends StatelessWidget {
   const SearchField({
     Key? key,
@@ -93,9 +98,7 @@ class SearchField extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         hintText: "Search",
-        hintStyle: TextStyle(
-            color: Colors.black
-        ),
+        hintStyle: TextStyle(color: Colors.black),
         fillColor: Colors.white,
         filled: true,
         border: OutlineInputBorder(
@@ -111,11 +114,13 @@ class SearchField extends StatelessWidget {
                 color: ConstColors.primaryColor,
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
-              child: Icon(Icons.search_rounded,size: 16,color: Colors.white,)
-          ),
+              child: Icon(
+                Icons.search_rounded,
+                size: 16,
+                color: Colors.white,
+              )),
         ),
       ),
     );
   }
 }
-

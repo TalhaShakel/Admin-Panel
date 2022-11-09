@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -26,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       // Navigator.pushNamed(context, "dashboard");
+      
       Get.to(() => MainScreen());
       EasyLoading.dismiss();
       Get.snackbar("LOGIN Succesfull", "");
@@ -37,6 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
       Get.snackbar("${e}", "");
     }
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: InkWell(
                     onTap: () {
                       login(email.text.trim(), password.text.trim(), context);
+                      // dataGet();
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 10, right: 10),
