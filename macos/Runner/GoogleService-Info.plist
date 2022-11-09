@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>189309535442-6kmp1o3o04j46ja6q3hj23q665418qdt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.189309535442-6kmp1o3o04j46ja6q3hj23q665418qdt</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>189309535442-sv5tgr59fe3q6b2u4ml0d8go87vpl2bk.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBEsUxhxm5gCltml-JSNPE6wQp4pA_FC8s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>189309535442</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.trillestAdmin</string>
+	<key>PROJECT_ID</key>
+	<string>oasis-app-delivery</string>
+	<key>STORAGE_BUCKET</key>
+	<string>oasis-app-delivery.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:189309535442:ios:6ee560394e6b072125990b</string>
+	<key>DATABASE_URL</key>
+	<string>https://oasis-app-delivery-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

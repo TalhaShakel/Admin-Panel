@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "189309535442",
+    "firebase_url": "https://oasis-app-delivery-default-rtdb.firebaseio.com",
+    "project_id": "oasis-app-delivery",
+    "storage_bucket": "oasis-app-delivery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189309535442:android:f398ca2956b23b2d25990b",
+        "android_client_info": {
+          "package_name": "com.example.trillest_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqmZLa_noY1m3IC2m7IZnarzaKVBLV-jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189309535442:android:f59bc71f4ff525d725990b",
+        "android_client_info": {
+          "package_name": "com.merhawigulwet.driversapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189309535442-sv5tgr59fe3q6b2u4ml0d8go87vpl2bk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.merhawigulwet.driversapp",
+            "certificate_hash": "60adaa2d699e803a128ed070c9adea7ab42067dc"
+          }
+        },
+        {
+          "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqmZLa_noY1m3IC2m7IZnarzaKVBLV-jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189309535442:android:ee890e8d79a2124c25990b",
+        "android_client_info": {
+          "package_name": "com.merhawigulwet.usersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqmZLa_noY1m3IC2m7IZnarzaKVBLV-jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
