@@ -30,6 +30,13 @@
             {
               "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "189309535442-6kmp1o3o04j46ja6q3hj23q665418qdt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.trillestAdmin"
+              }
             }
           ]
         }
@@ -67,6 +74,13 @@
             {
               "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "189309535442-6kmp1o3o04j46ja6q3hj23q665418qdt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.trillestAdmin"
+              }
             }
           ]
         }
@@ -96,6 +110,13 @@
             {
               "client_id": "189309535442-669eunbso49o8ak71cs8rk7j4a88pnud.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "189309535442-6kmp1o3o04j46ja6q3hj23q665418qdt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.trillestAdmin"
+              }
             }
           ]
         }

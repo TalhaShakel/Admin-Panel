@@ -40,6 +40,38 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+
+  core
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script>
+    var firebaseConfig =  {
+  apiKey: "AIzaSyBzoW4wosoYDct5g3da0mfdPS9gQnP4I7k",
+  authDomain: "oasis-app-delivery.firebaseapp.com",
+  databaseURL: "https://oasis-app-delivery-default-rtdb.firebaseio.com",
+  projectId: "oasis-app-delivery",
+  storageBucket: "oasis-app-delivery.appspot.com",
+  messagingSenderId: "189309535442",
+  appId: "1:189309535442:web:2897f4b2d252e2d825990b",
+  measurementId: "G-SZL6KBFCZV"
+};
+    // {
+    //   apiKey: "...",
+    //   authDomain: "[YOUR_PROJECT].firebaseapp.com",
+    //   databaseURL: "https://[YOUR_PROJECT].firebaseio.com",
+    //   projectId: "[YOUR_PROJECT]",
+    //   storageBucket: "[YOUR_PROJECT].appspot.com",
+    //   messagingSenderId: "...",
+    //   appId: "1:...:web:...",
+    //   measurementId: "G-...",
+    // };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
