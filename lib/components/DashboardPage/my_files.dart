@@ -81,11 +81,14 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
 
   dataGet(type) async {
     try {
+      EasyLoading.show();
       DatabaseReference ref = FirebaseDatabase.instance.ref("$type");
       DatabaseEvent event = await ref.once();
       // print("object");
       Map<String, dynamic>? k = event.snapshot.value as Map<String, dynamic>;
       print(k.length.toString() + "$type");
+      setState(() {});
+      EasyLoading.dismiss();
 
       return k.length;
     } on FirebaseException catch (e) {
@@ -96,43 +99,41 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
 
   @override
   Widget build(BuildContext context) {
-    return rideRequests == null
-        ? Container()
-        : Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: widget.crossAxisCount,
-                crossAxisSpacing: defaultPadding,
-                mainAxisSpacing: defaultPadding,
-                childAspectRatio: widget.childAspectRatio,
-              ),
-              children: [
-                CustomTotalDetails(
-                    icon: Icons.person_rounded,
-                    detail: "${users}",
-                    title: "Total Users",
-                    colors: ConstColors.primaryColor),
-                CustomTotalDetails(
-                    icon: Icons.person_rounded,
-                    detail: "${users}",
-                    title: "Active Users",
-                    colors: ConstColors.red),
-                CustomTotalDetails(
-                    icon: Icons.person_rounded,
-                    detail: "${drivers}",
-                    title: "Total Drivers",
-                    colors: ConstColors.lightBlue),
-                CustomTotalDetails(
-                    icon: Icons.person_rounded,
-                    detail: "${activeDrivers}",
-                    title: "Active Drivers",
-                    colors: ConstColors.green),
-              ],
-            ),
-          );
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: widget.crossAxisCount,
+          crossAxisSpacing: defaultPadding,
+          mainAxisSpacing: defaultPadding,
+          childAspectRatio: widget.childAspectRatio,
+        ),
+        children: [
+          CustomTotalDetails(
+              icon: Icons.person_rounded,
+              detail: "${users}",
+              title: "Total Users",
+              colors: ConstColors.primaryColor),
+          CustomTotalDetails(
+              icon: Icons.person_rounded,
+              detail: "${users}",
+              title: "Active Users",
+              colors: ConstColors.red),
+          CustomTotalDetails(
+              icon: Icons.person_rounded,
+              detail: "${drivers}",
+              title: "Total Drivers",
+              colors: ConstColors.lightBlue),
+          CustomTotalDetails(
+              icon: Icons.person_rounded,
+              detail: "${activeDrivers}",
+              title: "Active Drivers",
+              colors: ConstColors.green),
+        ],
+      ),
+    );
   }
 }
 
