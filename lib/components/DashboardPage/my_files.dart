@@ -3,6 +3,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:trillest_admin/Screens/Drivers.dart';
+import 'package:trillest_admin/Screens/User.dart';
+// import 'package:trillest_admin/Screens/activeDrivers.dart';
 
 import '../../constants/Const_Colors.dart';
 import '../../constants/Responsive.dart';
@@ -55,6 +58,7 @@ class FileInfoCardGridView extends StatefulWidget {
 class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
   @override
   var rideRequests, activeDrivers, drivers, users;
+  var activeDrivers1, users1;
   void initState() {
     // TODO: implement initState
     dataGet("All Ride Requests").then((id) {
@@ -74,6 +78,14 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
     dataGet("users").then((id) {
       print("Id that was loaded: $id");
       users = id;
+    });
+    dataGet2("drivers").then((id) {
+      print("Id that was loaded11: $id");
+      activeDrivers1 = id;
+    });
+    dataGet2("users").then((id) {
+      print("Id that was loaded11: $id");
+      users1 = id;
     });
 
     super.initState();
@@ -97,6 +109,24 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
     }
   }
 
+  dataGet2(type) async {
+    try {
+      EasyLoading.show();
+      DatabaseReference ref = FirebaseDatabase.instance.ref("$type");
+      DatabaseEvent event = await ref.once();
+      // print("object");
+      Map<String, dynamic>? k = event.snapshot.value as Map<String, dynamic>;
+      print(k.length.toString() + "$type");
+      setState(() {});
+      EasyLoading.dismiss();
+
+      return k;
+    } on FirebaseException catch (e) {
+      Get.snackbar("${e.message}", "");
+      print(e.toString() + "eee");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -111,26 +141,59 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
           childAspectRatio: widget.childAspectRatio,
         ),
         children: [
-          CustomTotalDetails(
-              icon: Icons.person_rounded,
-              detail: "${users}",
-              title: "Total Users",
-              colors: ConstColors.primaryColor),
-          CustomTotalDetails(
-              icon: Icons.person_rounded,
-              detail: "${users}",
-              title: "Active Users",
-              colors: ConstColors.red),
-          CustomTotalDetails(
-              icon: Icons.person_rounded,
-              detail: "${drivers}",
-              title: "Total Drivers",
-              colors: ConstColors.lightBlue),
-          CustomTotalDetails(
-              icon: Icons.person_rounded,
-              detail: "${activeDrivers}",
-              title: "Active Drivers",
-              colors: ConstColors.green),
+          GestureDetector(
+            onTap: () {
+              Get.to(() => User(
+                    user: users1,
+                  ));
+              print(users1);
+            },
+            child: CustomTotalDetails(
+                icon: Icons.person_rounded,
+                detail: "${users}",
+                title: "Total Users",
+                colors: ConstColors.primaryColor),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(() => User(
+                    user: users1,
+                  ));
+              print(users1);
+            },
+            child: CustomTotalDetails(
+                icon: Icons.person_rounded,
+                detail: "${users}",
+                title: "Active Users",
+                colors: ConstColors.red),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(() => Drivers(
+                    activedriver: activeDrivers1,
+                  ));
+
+              // print(drivers);
+            },
+            child: CustomTotalDetails(
+                icon: Icons.person_rounded,
+                detail: "${drivers}",
+                title: "Total Drivers",
+                colors: ConstColors.lightBlue),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(() => Drivers(
+                    activedriver: activeDrivers1,
+                  ));
+              print(activeDrivers1);
+            },
+            child: CustomTotalDetails(
+                icon: Icons.person_rounded,
+                detail: "${activeDrivers}",
+                title: "Active Drivers",
+                colors: ConstColors.green),
+          ),
         ],
       ),
     );
