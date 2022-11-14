@@ -1,103 +1,52 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:trillest_admin/Screens/Support/chat.dart';
 
-// class Support_page extends StatelessWidget {
-//   const Support_page({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold();
-//   }
-// }
-
-class Support_page extends StatefulWidget {
-  String email;
-  Support_page({required this.email});
-  @override
-  _Support_pageState createState() => _Support_pageState(email: email);
-}
-
-class _Support_pageState extends State<Support_page> {
-  String email;
-  _Support_pageState({required this.email});
-
-  Stream<QuerySnapshot> _Support_pagetream = FirebaseFirestore.instance
-      .collection('Support_page')
-      .orderBy('time')
-      .snapshots();
+class Support extends StatelessWidget {
+  Support({super.key});
+  DatabaseReference _messagesRef =
+      FirebaseDatabase.instance.reference().child('drivers');
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: _Support_pagetream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("something is wrong");
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-
-        return ListView.builder(
-          itemCount: snapshot.data!.docs.length,
-          physics: ScrollPhysics(),
-          shrinkWrap: true,
-          primary: true,
-          itemBuilder: (_, index) {
-            QueryDocumentSnapshot qs = snapshot.data!.docs[index];
-            Timestamp t = qs['time'];
-            DateTime d = t.toDate();
-            print(d.toString());
-            return Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: Column(
-                crossAxisAlignment: email == qs['email']
-                    ? CrossAxisAlignment.end
-                    : CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 300,
-                    child: ListTile(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.purple,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      title: Text(
-                        qs['email'],
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      subtitle: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 200,
-                            child: Text(
-                              qs['message'],
-                              softWrap: true,
-                              style: TextStyle(
-                                fontSize: 15,
+    return Scaffold(
+      body: Column(
+        children: [
+          FirebaseAnimatedList(
+              shrinkWrap: true,
+              query: _messagesRef,
+              itemBuilder: (context, snapshot, animation, index) {
+                final json = snapshot.value as Map<dynamic, dynamic>;
+                print(json);
+                return json["messages"] == null
+                    ? Container()
+                    : GestureDetector(
+                        onTap: () {
+                          Get.to(() => chatpage(data:json));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            child: ListTile(
+                              title: Text("${json["name"]}"),
+                              subtitle: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("${json["email"]}"),
+                                  Text("Phone: ${json["phone"]}"),
+                                ],
                               ),
                             ),
                           ),
-                          Text(
-                            d.hour.toString() + ":" + d.minute.toString(),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
+                        ),
+                      );
+              }),
+        ],
+      ),
     );
   }
 }

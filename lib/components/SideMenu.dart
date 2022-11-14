@@ -24,8 +24,8 @@ class SideMenu extends StatelessWidget {
             )),
             ListTile(
               onTap: () {
-                Get.to(() => Support_page(
-                      email: "adminosis@gmail.com",
+                Get.to(() => Support(
+                    // email: "adminosis@gmail.com",
                     ));
               },
               horizontalTitleGap: 0.0,
