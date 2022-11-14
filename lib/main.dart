@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       builder: EasyLoading.init(),
       title: 'Ossis Admin Panel',
       debugShowCheckedModeBanner: false,
-      home: MainScreen(),
+      home: LoginScreen(),
     );
   }
 }
