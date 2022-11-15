@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trillest_admin/Screens/Login_page/Login_screen.dart';
 import 'package:trillest_admin/Screens/Support/support.dart';
+import 'package:trillest_admin/Screens/User%20customer%20support/user_chat_model.dart';
 
 import '../constants/ConstImages.dart';
 import '../constants/Const_Colors.dart';
@@ -24,6 +25,26 @@ class SideMenu extends StatelessWidget {
             )),
             ListTile(
               onTap: () {
+                Get.to(() => User_Support(
+                    // email: "adminosis@gmail.com",
+                    ));
+              },
+              horizontalTitleGap: 0.0,
+              leading: Icon(
+                Icons.dashboard,
+                color: Colors.white54,
+                size: 16,
+              ),
+              title: Text("User Customer support",
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                        color: Colors.white54,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 13),
+                  )),
+            ),
+            ListTile(
+              onTap: () {
                 Get.to(() => Support(
                     // email: "adminosis@gmail.com",
                     ));
@@ -34,7 +55,7 @@ class SideMenu extends StatelessWidget {
                 color: Colors.white54,
                 size: 16,
               ),
-              title: Text("Customer support",
+              title: Text("Driver Customer support",
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                         color: Colors.white54,

@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       // Navigator.pushNamed(context, "dashboard");
-      
+
       Get.to(() => MainScreen());
       EasyLoading.dismiss();
       Get.snackbar("LOGIN Succesfull", "");
@@ -39,8 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
       Get.snackbar("${e}", "");
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
