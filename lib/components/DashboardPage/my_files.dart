@@ -3,8 +3,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:trillest_admin/Screens/Dashborad/main_screen.dart';
 import 'package:trillest_admin/Screens/Drivers.dart';
 import 'package:trillest_admin/Screens/User.dart';
+import 'package:trillest_admin/components/DashboardPage/dashboard_page.dart';
 // import 'package:trillest_admin/Screens/activeDrivers.dart';
 
 import '../../constants/Const_Colors.dart';
@@ -41,6 +43,8 @@ class MyFiles extends StatelessWidget {
   }
 }
 
+var activeDrivers1, users1;
+
 class FileInfoCardGridView extends StatefulWidget {
   const FileInfoCardGridView({
     Key? key,
@@ -58,7 +62,7 @@ class FileInfoCardGridView extends StatefulWidget {
 class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
   @override
   var rideRequests, activeDrivers, drivers, users;
-  var activeDrivers1, users1;
+  // var users1;
   void initState() {
     // TODO: implement initState
     dataGet("All Ride Requests").then((id) {
@@ -101,6 +105,7 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
       print(k.length.toString() + "$type");
       setState(() {});
       EasyLoading.dismiss();
+      Get.to(() => MainScreen());
 
       return k.length;
     } on FirebaseException catch (e) {
@@ -119,6 +124,7 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
       print(k.length.toString() + "$type");
       setState(() {});
       EasyLoading.dismiss();
+      Get.to(() => MainScreen());
 
       return k;
     } on FirebaseException catch (e) {

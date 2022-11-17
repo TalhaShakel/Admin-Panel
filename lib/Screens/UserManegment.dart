@@ -1,14 +1,15 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:trillest_admin/Screens/Dashborad/main_screen.dart';
 import 'package:trillest_admin/components/DashboardPage/my_files.dart';
-import 'package:trillest_admin/main.dart';
 
-class User extends StatelessWidget {
+class UserManegment extends StatelessWidget {
   var user;
-  User({super.key, required this.user});
+  UserManegment({super.key, this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -47,20 +48,19 @@ class User extends StatelessWidget {
                         EasyLoading.show();
                         DatabaseReference ref = await FirebaseDatabase.instance
                             .ref("users/${user[key]["id"]}");
-                        user[key]["block"] == false
-                            ? await ref.update({"block": true})
-                            : await ref.update({"block": false});
-
+                        user[key]["aprroved"] == false
+                            ? await ref.update({"aprroved": true})
+                            : await ref.update({"aprroved": false});
                         EasyLoading.dismiss();
-                        // main();
                         Get.to(() => MyFiles());
                       } catch (e) {
                         Get.snackbar("$e", "");
                         print(e);
                       }
                     },
-                    child:
-                        Text(user[key]["block"] == true ? "UnBlock" : "Block")),
+                    child: Text(user[key]["aprroved"] == true
+                        ? "Approved"
+                        : "UnApproved")),
               ),
             ),
           );

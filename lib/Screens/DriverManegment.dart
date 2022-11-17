@@ -5,13 +5,12 @@ import 'package:get/get.dart';
 import 'package:trillest_admin/Screens/Dashborad/main_screen.dart';
 import 'package:trillest_admin/components/DashboardPage/my_files.dart';
 
-class Drivers extends StatelessWidget {
+class DrverManegment extends StatelessWidget {
   var activedriver;
-  Drivers({super.key, required this.activedriver});
+  DrverManegment({super.key, required this.activedriver});
 
   @override
   Widget build(BuildContext context) {
-    print(activedriver.runtimeType);
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView.builder(
@@ -50,9 +49,9 @@ class Drivers extends StatelessWidget {
                               DatabaseReference ref = await FirebaseDatabase
                                   .instance
                                   .ref("drivers/${activedriver[key]["id"]}");
-                              activedriver[key]["block"] == false
-                                  ? await ref.update({"block": true})
-                                  : await ref.update({"block": false});
+                              activedriver[key]["aprroved"] == false
+                                  ? await ref.update({"aprroved": true})
+                                  : await ref.update({"aprroved": false});
                               EasyLoading.dismiss();
                               Get.to(() => MyFiles());
                             } catch (e) {
@@ -60,9 +59,9 @@ class Drivers extends StatelessWidget {
                               print(e);
                             }
                           },
-                          child: Text(activedriver[key]["block"] == true
-                              ? "UnBlock"
-                              : "Block")),
+                          child: Text(activedriver[key]["aprroved"] == true
+                              ? "Approved"
+                              : "UnApproved")),
                     ),
                   ),
                 );

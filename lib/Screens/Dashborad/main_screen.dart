@@ -11,6 +11,7 @@ import '../../controllers/MenuController.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
+
   dataGet(type) async {
     try {
       DatabaseReference ref = FirebaseDatabase.instance.ref("$type");

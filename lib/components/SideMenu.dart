@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trillest_admin/Screens/DriverManegment.dart';
 import 'package:trillest_admin/Screens/Login_page/Login_screen.dart';
 import 'package:trillest_admin/Screens/Support/support.dart';
 import 'package:trillest_admin/Screens/User%20customer%20support/user_chat_model.dart';
+import 'package:trillest_admin/Screens/UserManegment.dart';
+import 'package:trillest_admin/components/DashboardPage/my_files.dart';
 
 import '../constants/ConstImages.dart';
 import '../constants/Const_Colors.dart';
@@ -64,7 +67,11 @@ class SideMenu extends StatelessWidget {
                   )),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Get.to(() => UserManegment(
+                      user: users1,
+                    ));
+              },
               horizontalTitleGap: 0.0,
               leading: Icon(
                 Icons.video_camera_back_outlined,
@@ -80,7 +87,11 @@ class SideMenu extends StatelessWidget {
                   )),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Get.to(() => DrverManegment(
+                      activedriver: activeDrivers1,
+                    ));
+              },
               horizontalTitleGap: 0.0,
               leading: Icon(
                 Icons.monetization_on_rounded,
