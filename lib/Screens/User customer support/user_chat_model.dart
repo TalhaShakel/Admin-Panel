@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trillest_admin/Screens/User%20customer%20support/User_support.dart';
+import 'package:trillest_admin/constants/Const_Colors.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class User_Support extends StatelessWidget {
@@ -14,6 +15,7 @@ class User_Support extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ConstColors.primaryColor,
         title: "User Support requests".text.make(),
       ),
       body: Column(
