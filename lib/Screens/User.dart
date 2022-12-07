@@ -21,46 +21,52 @@ class User extends StatelessWidget {
 
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Card(
-              // color: Color.fromARGB(255, 219, 180, 186),
-              elevation: 8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(11), // if you need this
-                side: BorderSide(
-                  color: Colors.red,
-                  width: 1,
+            child: GestureDetector(
+              onTap: () {
+                print(user[key]);
+              },
+              child: Card(
+                // color: Color.fromARGB(255, 219, 180, 186),
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(11), // if you need this
+                  side: BorderSide(
+                    color: Colors.red,
+                    width: 1,
+                  ),
                 ),
-              ),
 
-              child: ListTile(
-                title: Text("${user[key]["name"]}"),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("${user[key]["email"]}"),
-                    Text("Phone :${user[key]["phone"]}"),
-                  ],
+                child: ListTile(
+                  title: Text("${user[key]["name"]}"),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("${user[key]["email"]}"),
+                      Text("Phone :${user[key]["phone"]}"),
+                    ],
+                  ),
+                  trailing: GestureDetector(
+                      onTap: () async {
+                        try {
+                          EasyLoading.show();
+                          DatabaseReference ref = await FirebaseDatabase
+                              .instance
+                              .ref("users/${user[key]["id"]}");
+                          user[key]["block"] == false
+                              ? await ref.update({"block": true})
+                              : await ref.update({"block": false});
+
+                          EasyLoading.dismiss();
+                          // main();
+                          Get.to(() => MyFiles());
+                        } catch (e) {
+                          Get.snackbar("$e", "");
+                          print(e);
+                        }
+                      },
+                      child: Text(
+                          user[key]["block"] == true ? "UnBlock" : "Block")),
                 ),
-                trailing: GestureDetector(
-                    onTap: () async {
-                      try {
-                        EasyLoading.show();
-                        DatabaseReference ref = await FirebaseDatabase.instance
-                            .ref("users/${user[key]["id"]}");
-                        user[key]["block"] == false
-                            ? await ref.update({"block": true})
-                            : await ref.update({"block": false});
-
-                        EasyLoading.dismiss();
-                        // main();
-                        Get.to(() => MyFiles());
-                      } catch (e) {
-                        Get.snackbar("$e", "");
-                        print(e);
-                      }
-                    },
-                    child:
-                        Text(user[key]["block"] == true ? "UnBlock" : "Block")),
               ),
             ),
           );

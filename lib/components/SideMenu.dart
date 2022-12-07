@@ -23,7 +23,7 @@ class SideMenu extends StatelessWidget {
           children: [
             DrawerHeader(
                 child: Image.asset(
-              ConstImages.appLogo,
+              ConstImages.appLogo2,
               width: 120,
             )),
             ListTile(

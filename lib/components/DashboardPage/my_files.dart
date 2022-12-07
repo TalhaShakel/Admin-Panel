@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:trillest_admin/Screens/Dashborad/main_screen.dart';
 import 'package:trillest_admin/Screens/Drivers.dart';
+import 'package:trillest_admin/Screens/History.dart';
 import 'package:trillest_admin/Screens/User.dart';
 import 'package:trillest_admin/components/DashboardPage/dashboard_page.dart';
 // import 'package:trillest_admin/Screens/activeDrivers.dart';
@@ -62,12 +63,16 @@ class FileInfoCardGridView extends StatefulWidget {
 class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
   @override
   var rideRequests, activeDrivers, drivers, users;
-  // var users1;
+  var history;
   void initState() {
     // TODO: implement initState
     dataGet("All Ride Requests").then((id) {
       print("Id that was loaded: $id");
       rideRequests = id;
+    });
+    dataGet2("All Ride Requests").then((id) {
+      print("All Ride Requests");
+      history = id;
     });
     // rideRequests = dataGet("All Ride Requests");
     dataGet("activeDrivers").then((id) {
@@ -198,6 +203,27 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
                 icon: Icons.person_rounded,
                 detail: "${activeDrivers}",
                 title: "Active Drivers",
+                colors: ConstColors.green),
+          ),
+          GestureDetector(
+            onTap: () async {
+              EasyLoading.show();
+              print(history);
+              await dataGet2("All Ride Requests").then((id) {
+                print("All Ride Requests");
+                history = id;
+                print(history);
+              });
+              EasyLoading.dismiss();
+              Get.to(() => History(
+                    history: history,
+                  ));
+              // print(activeDrivers1);
+            },
+            child: CustomTotalDetails(
+                icon: Icons.person_rounded,
+                detail: "${rideRequests}",
+                title: "All Ride History",
                 colors: ConstColors.green),
           ),
         ],
