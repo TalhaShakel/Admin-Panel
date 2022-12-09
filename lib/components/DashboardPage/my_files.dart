@@ -215,6 +215,27 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
                 print(history);
               });
               EasyLoading.dismiss();
+              Get.to(() => History2(
+                    history: history,
+                  ));
+              // print(activeDrivers1);
+            },
+            child: CustomTotalDetails(
+                icon: Icons.person_rounded,
+                detail: "${rideRequests}",
+                title: "All User History",
+                colors: ConstColors.green),
+          ),
+          GestureDetector(
+            onTap: () async {
+              EasyLoading.show();
+              print(history);
+              await dataGet2("All Ride Requests").then((id) {
+                print("All Ride Requests");
+                history = id;
+                print(history);
+              });
+              EasyLoading.dismiss();
               Get.to(() => History(
                     history: history,
                   ));
@@ -223,7 +244,7 @@ class _FileInfoCardGridViewState extends State<FileInfoCardGridView> {
             child: CustomTotalDetails(
                 icon: Icons.person_rounded,
                 detail: "${rideRequests}",
-                title: "All Ride History",
+                title: "All Driver History",
                 colors: ConstColors.green),
           ),
         ],
